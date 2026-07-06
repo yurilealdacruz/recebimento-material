@@ -1,4 +1,5 @@
 "use client";
+import { supabase } from "../src/lib/supabase";
 
 import { useState } from "react";
 
@@ -10,25 +11,48 @@ export default function Home() {
   const [material, setMaterial] = useState("");
   const [confirmado, setConfirmado] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    if (!confirmado) {
-      alert("Você precisa confirmar o recebimento.");
-      return;
-    }
+  if (!confirmado) {
+    alert("Você precisa confirmar o recebimento.");
+    return;
+  }
 
-    console.log({
+const { error } = await supabase
+  .from("recebimentos")
+  .insert([
+    {
       nome,
       email,
       nucleo,
       cargo,
       material,
       confirmado,
-    });
+    },
+  ]);
 
-    alert("Recebimento registrado com sucesso!");
-  };
+  if (error) {
+    console.error("Erro Supabase:", error);
+
+    alert(
+      `Erro ao salvar:\n${error.message}`
+    );
+
+    return;
+  }
+
+  
+
+  alert("Recebimento registrado com sucesso!");
+
+  setNome("");
+  setEmail("");
+  setNucleo("");
+  setCargo("");
+  setMaterial("");
+  setConfirmado(false);
+};
 
   return (
     <main className="min-h-screen bg-slate-100 flex items-center justify-center p-6">
