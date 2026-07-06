@@ -82,7 +82,7 @@ const { error } = await supabase
 
           <div>
             <label className="block text-slate-700 font-medium mb-1">
-              E-mail
+              Nº de Chamado
             </label>
 
             <input
@@ -93,24 +93,9 @@ const { error } = await supabase
               placeholder="Digite seu e-mail"
             />
           </div>
-
           <div>
             <label className="block text-slate-700 font-medium mb-1">
-              Núcleo
-            </label>
-
-            <input
-              type="text"
-              value={nucleo}
-              onChange={(e) => setNucleo(e.target.value)}
-              className="w-full border border-slate-300 rounded-lg p-3 text-slate-900"
-              placeholder="Ex.: Tecnologia da Informação"
-            />
-          </div>
-
-          <div>
-            <label className="block text-slate-700 font-medium mb-1">
-              Cargo
+              Quantidade
             </label>
 
             <input
